@@ -1,0 +1,105 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "GetAll";
+}
+
+<h2>Empleados</h2>
+
+<div class="container navbar-right">
+
+    <div class="row">
+        <div class=" col-md-12 col-sm-3">
+
+            @Html.ActionLink("Agregar Empleado", "Form", "Empleado", htmlAttributes: new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="row" style="padding-top:30px">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <tr>
+                <th class="text-center" scope="col">
+                    Editar
+                </th>
+                <th class="text-center" scope="col">
+                    IdEmpleado
+                </th>
+                <th class="text-center" scope="col">
+                    Nombre
+                </th>
+                <th class="text-center" scope="col">
+                    ApellidoPaterno
+                </th>
+                <th class="text-center" scope="col">
+                    ApellidoMaterno
+                </th>
+                <th class="text-center" scope="col">
+                    Area
+                </th>
+                <th class="text-center" scope="col">
+                    Fecha de nacimiento
+                </th>
+                <th class="text-center" scope="col">
+                    Sueldo
+                </th>
+
+                <th class="text-center" scope="col">
+                    Eliminar
+                </th>
+            </tr>
+
+
+
+
+
+
+            @foreach (ML.Empleado empleado in Model.Empleados)
+            {
+                <tr>
+
+                    <td class="text-center">
+                        <a href="@Url.Action("Form", "Empleado",new { IdEmpleado = empleado.IdEmpleao })" title="Edit">
+                            <img style="height: 20px; width: 20px; " src="../Content/img/índices.png" />
+                        </a>
+                        
+                    </td>
+
+                    <td class="text-center">
+                        @empleado.IdEmpleao
+                    </td>
+
+                    <td class="text-center">
+                        @empleado.Nombre
+                    </td>
+
+                    <td class="text-center">
+                        @empleado.ApellidoPaterno
+                    </td>
+                    <td class="text-center">
+                        @empleado.ApellidoMaterno
+                    </td>
+                    <td class="text-center">
+                        @empleado.Area.Nombre
+                    </td>
+                    <td class="text-center">
+                        @empleado.FechaDeNacimiento
+                    </td>
+                    <td class="text-center">
+                        @empleado.Sueldo
+                    </td>
+
+                    <th class="text-center">
+                        <a href="@Url.Action("Delete", "Empleado", new { IdEmpleado = empleado.IdEmpleao })" onclick="return confirm('Estas seguro que deseas eliminar estos datos?');">
+                            <img style="height: 20px; width: 20px" src="../Content/img/Eliminar.png" />
+                        </a>
+                    </th>
+
+                </tr>
+            }
+
+        </table>
+    </div>
+
+</div>

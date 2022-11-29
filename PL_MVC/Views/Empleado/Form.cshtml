@@ -1,0 +1,181 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "Form";
+}
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+@*<script>
+        $(function () {
+            $("#datepicker").datepicker({ minDate: -0, maxDate: "+1M +10D" });
+        });
+    </script>
+
+
+    <script>
+
+        $(document).ready(function () {
+            $(".datepicker-input").datepicker("option", "yearRange", "-99:+0");
+
+            $(".datepicker-input").datepicker("option", "maxDate", "+0m +0d");
+        });
+    </script>*@
+
+
+<script>
+    $(function () {
+        var date = new Date();
+        var currentMonth = date.getMonth();
+        var currentDate = date.getDate();
+        var currentYear = date.getFullYear();
+        $('#datepicker').datepicker({
+            minDate: new Date(currentYear, currentMonth, currentDate)
+        });
+    })
+</script>
+
+<h2>Agregar o actualizar</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="text-align:justify"></h2><br />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>@ViewBag.Titulo</h4>
+            <hr />
+        </div>
+    </div>
+
+
+    @using (Html.BeginForm("Form", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="form-group hidden">
+
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.IdEmpleao, new { @class = "form-control hidden", @readonly = true })
+                @Html.ValidationMessageFor(model => model.IdEmpleao)
+            </div>
+        </div>
+
+        <div class="form-group">
+
+
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Nombre, new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Nombre)
+                    <div id="msgi2"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.ApellidoPaterno, new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ApellidoPaterno)
+                    <div id="msgi2"></div>
+                </div>
+            </div>
+
+            @*---------------------------------------------------------------------------------------------------*@
+
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.ApellidoMaterno, new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ApellidoMaterno)
+                    <div id="msgi2"></div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Area.IdArea, "IdArea", new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+
+                    @Html.DropDownListFor(model => model.Area.IdArea, new SelectList(Model.Area.Areas, "IdArea", "Nombre"),
+         "Selecciona una opcion", new { @class = "form-control" })
+
+                    @Html.ValidationMessageFor(model => model.Area.Areas)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.FechaDeNacimiento, new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.FechaDeNacimiento, new { @class = "form-control datepicker", @type = "date", @Value = Model.FechaDeNacimiento.ToString("dd/MM/yyyy") })
+                    @Html.ValidationMessageFor(model => model.FechaDeNacimiento)
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Sueldo, new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.Sueldo, new { id = "Precio", @class = "form-control input-sm" })
+                    @Html.ValidationMessageFor(model => model.Sueldo)
+                    <div id="m"></div>
+
+                </div>
+            </div>
+
+
+
+
+            <br />
+
+
+
+
+
+
+            <div class="form-group">
+                <div class="align-content-center">
+                    <input type="submit" name="Upload" value="@ViewBag.Accion" class="btn btn-success" />
+                    @Html.ActionLink("Cancelar", "GetAll", "Empleado", htmlAttributes: new { @class = "btn btn-danger", })
+                </div>
+            </div>
+
+
+        </div>
+    }
+
+</div>
+
+
+
